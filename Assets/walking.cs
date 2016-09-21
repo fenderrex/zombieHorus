@@ -25,11 +25,11 @@ public class walking : MonoBehaviour
         //moveDirection = transform.TransformDirection(transform.forward);
 
         if (Input.GetKey("w"))
-            transform.Translate(transform.forward * speed, Space.Self);
+            transform.Translate(transform.forward * speed*Time.deltaTime, Space.Self);
         //transform.Translate(transform.forward * speed, Space.Self);
         if (Input.GetKey("s"))
-            transform.Translate(transform.forward * -speed, Space.Self);
-        transform.Translate(transform.up* -gravity*Time.deltaTime, Space.World);//todo get mass... gravity
+            transform.Translate(transform.forward * -speed * Time.deltaTime, Space.Self);
+        //transform.Translate(transform.up* -gravity*Time.deltaTime, Space.World);//todo get mass... gravity
         // if (Input.GetButton("jump"))
         //    transform.Translate(Vector3.up * Time.deltaTime,Space.World);
 

@@ -13,6 +13,8 @@ public class mouselook : MonoBehaviour {
     public float maximumX = 360F;
     public float minimumY = -60F;
     public float maximumY = 60F;
+    public float lowLimit = 2;
+    public float uperLimit = 10;
     float rotationX = 0F;
     float rotationY = 0F;
     Quaternion originalRotation;
@@ -31,10 +33,13 @@ public class mouselook : MonoBehaviour {
         }
         else if (axes == RotationAxes.MouseX)
         {
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-            rotationX = ClampAngle(rotationX, minimumX, maximumX);
+            rotationX += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivityX;
+            rotationX = ClampAngle(rotationX, minimumX, maximumX) ;
             Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
             transform.localRotation = originalRotation * xQuaternion;
+            SpringJoint hinge = gameObject.GetComponent(typeof(SpringJoint)) as SpringJoint;
+            hinge.anchor = hinge.anchor - new Vector3(0,Input.GetAxis("Mouse Y") * Time.deltaTime,0);
+            hinge.anchor = new Vector3(hinge.anchor.x, hinge.anchor.y, ClampZoom(hinge.anchor.z));
         }
         else
         {
@@ -47,18 +52,39 @@ public class mouselook : MonoBehaviour {
     void Start()
     {
         // Make the rigid body not change rotation
-        if (rigidbody)
-            rigidbody.freezeRotation = true;
+        if (GetComponent<Rigidbody>())
+            GetComponent<Rigidbody>().freezeRotation = true;
         originalRotation = transform.localRotation;
     }
     public static float ClampAngle(float angle, float min, float max)
     {
-        if (angle & lt) {// -360F){
+        if (angle < -360F)
+        {
             angle += 360F;
         }
-        if (angle & gt) {//  360F){
+        if (angle > 360F)
+        {
             angle -= 360F;
         }
         return Mathf.Clamp(angle, min, max);
+    }
+    public float ClampZoom(float Z)
+    {
+
+        float zoom=-Z;
+        float wheel = Input.GetAxis("Mouse ScrollWheel") * 3;
+        if (zoom + wheel > uperLimit){
+            zoom= 10;
+        }else if (zoom + wheel < lowLimit)
+        {
+            zoom = 2;
+        }
+        else
+        {
+            zoom=zoom+wheel;
+        }
+        print(wheel);
+        print(zoom);
+        return -zoom;
     }
 }
