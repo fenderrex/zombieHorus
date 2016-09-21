@@ -38,8 +38,9 @@ public class mouselook : MonoBehaviour {
             Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
             transform.localRotation = originalRotation * xQuaternion;
             SpringJoint hinge = gameObject.GetComponent(typeof(SpringJoint)) as SpringJoint;
-            hinge.anchor = hinge.anchor - new Vector3(0,Input.GetAxis("Mouse Y") * Time.deltaTime,0);
-            hinge.anchor = new Vector3(hinge.anchor.x, hinge.anchor.y, ClampZoom(hinge.anchor.z));
+            hinge.anchor = hinge.anchor - new Vector3(0,(Input.GetAxis("Mouse Y") * Time.deltaTime),0);
+            
+            hinge.anchor = new Vector3(hinge.anchor.x, ((hinge.anchor.y<=0?0: hinge.anchor.y)>=uperLimit*.5f?uperLimit*.5f: (hinge.anchor.y <= 0 ? 0 : hinge.anchor.y)), ClampZoom(hinge.anchor.z));
         }
         else
         {
