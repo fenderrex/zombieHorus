@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class mouselook : MonoBehaviour {
+{
 
 
 
@@ -18,7 +18,11 @@ public class mouselook : MonoBehaviour {
     float rotationX = 0F;
     float rotationY = 0F;
     Quaternion originalRotation;
-    void Update()
+    //public override void Mouse()
+    //{
+    //    this.update();
+    //}
+    void update()
     {
         if (axes == RotationAxes.MouseXAndY)
         {

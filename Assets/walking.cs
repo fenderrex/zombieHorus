@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class walking : MonoBehaviour
+public class walking : PlayerController
 {
     public float speed = 6.0F;
     public float jumpSpeed = 8.0F;
@@ -16,7 +16,7 @@ public class walking : MonoBehaviour
     void Update()
     {
         CharacterController controller = GetComponent<CharacterController>();
-        Quaternion rot = transform.rotation; ;
+        Quaternion rot = transform.rotation; 
         //if (controller.isGrounded)
         //{
             //float Angle = Quaternion.Angle(Quaternion.Euler(new Vector3(0, 0, 0)), transform.rotation);
