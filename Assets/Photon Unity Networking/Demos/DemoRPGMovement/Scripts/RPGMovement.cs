@@ -10,6 +10,7 @@ public class RPGMovement : MonoBehaviour
     public float BackwardSpeed;
     public float StrafeSpeed;
     public float RotateSpeed;
+    private bool menuup=false;
     public GameObject[] pops;
     CharacterController m_CharacterController;
     Vector3 m_LastPosition;
@@ -27,6 +28,22 @@ public class RPGMovement : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_PhotonView = GetComponent<PhotonView>();
         m_TransformView = GetComponent<PhotonTransformView>();
+           Vector3 rig;
+        for (float i = .0f; i < 8; i += .5f)
+        {
+            Vector3 focal = Camera.main.transform.forward * 3;
+            rig = focal + new Vector3(Mathf.Cos(i) * 1.25f, Mathf.Sin(i) * 1.25f, 0);
+            //m_LastPosition = rig;
+            Menu.transform.parent = Camera.main.transform;
+            //Rigidbody rocketClone = (Rigidbody)Instantiate(pops[0], transform.position, transform.rotation);//for mimbus
+            rocketClone[(int)(i * 10)] = (GameObject)Instantiate(pops[0], Camera.main.transform.position + rig, transform.rotation);//for mimbus
+            rocketClone[(int)(i * 10)].transform.parent = Camera.main.transform;
+            rocketClone[(int)(i * 10)].transform.LookAt(Camera.main.transform.position);
+            rocketClone[(int)(i * 10)].GetComponent<Collider>().enabled = false;
+            rocketClone[(int)(i * 10)].SetActive(false);
+            Menu.transform.LookAt(Camera.main.transform.position);
+        }
+
     }
 
     void Update()
@@ -53,30 +70,31 @@ public class RPGMovement : MonoBehaviour
     void UpdateTools()
     {
 
-        if (Input.GetKey(KeyCode.G))
+        if (Input.GetKeyUp(KeyCode.G))
         {
             Vector3 rig;
-            
 
-            for (float i = .01f; i < 8; i += .5f)
+            if (menuup == false)
             {
-                Vector3 focal = Camera.main.transform.forward * 2;
-                rig = focal + new Vector3(Mathf.Cos(i) * 1.5f, Mathf.Sin(i) * 1.5f);
-                //m_LastPosition = rig;
-                Menu.transform.position = focal;
-                //Rigidbody rocketClone = (Rigidbody)Instantiate(pops[0], transform.position, transform.rotation);//for mimbus
-                rocketClone[(int)(i*10)] = (GameObject)Instantiate(pops[0], Camera.main.transform.position+rig, transform.rotation);//for mimbus
-                rocketClone[(int)(i * 10)].transform.parent = Menu.transform;
-                Menu.transform.LookAt(Camera.main.transform.position);
+                menuup = true;
+                for (float i = .0f; i < 8; i += .5f)
+                {
+                    // Vector3 focal = Camera.main.transform.forward * 3;
+                    //rig = focal + new Vector3(Mathf.Cos(i) * 1.25f, Mathf.Sin(i) * 1.25f,0);
+                    //m_LastPosition = rig;
+                    //Menu.transform.parent = Camera.main.transform;
+                    //Rigidbody rocketClone = (Rigidbody)Instantiate(pops[0], transform.position, transform.rotation);//for mimbus
+                    rocketClone[(int)(i * 10)].SetActive(true);
+
+                }
+            }else {
+                menuup = false;
+                for (float i = .0f; i < 8; i += .5f)
+                {
+                    rocketClone[(int)(i * 10)].SetActive(false);
+                }
             }
 
-
-
-        }else{
-            for (int i = 1; i < 100; i += 1)
-            {
-               Destroy(rocketClone[i]);
-            }
         }
         if (Input.GetKey(KeyCode.F))
         {
@@ -149,8 +167,10 @@ public class RPGMovement : MonoBehaviour
 
     void UpdateForwardMovement()
     {
+        
         if (Input.GetKey(KeyCode.W) || Input.GetAxisRaw("Vertical") > 0.1f)
         {
+            print("runinf motherfucker");
             m_CurrentMovement = transform.forward * ForwardSpeed;
         }
     }
