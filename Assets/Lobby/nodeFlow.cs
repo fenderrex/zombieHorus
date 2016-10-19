@@ -10,11 +10,11 @@ public class nodeFlow : MonoBehaviour {
 	public GameObject prop;
 	// Use this for initialization
 	void Start() {
-		foreach(int i in Set){
-			
-			X.AddKey (i, Set[i].transform.posstion.x);
-			Y.AddKey (i, Set[i].transform.posstion.y);
-			Z.AddKey (i, Set[i].transform.posstion.z);
+		//for(GameObject i in Set){
+        for (int i = 0; i < Set.Length; i++) { 
+            X.AddKey (i, Set[i].transform.position.x);
+			Y.AddKey (i, Set[i].transform.position.y);
+			Z.AddKey (i, Set[i].transform.position.z);
 		}
 		print ("nodes accounted for!");
 	}
@@ -25,10 +25,10 @@ public class nodeFlow : MonoBehaviour {
 	}
 	void FixedUpdate() {
 		float t=Time.time*TimeShift.Evaluate(Time.time);
-		prop.transform.posstion=GetPoint(t);
+		prop.transform.position=(Vector3)GetPoint(t);
 	}
-	Vector3 virtural GetPoint(float p){
-		new Vector(X.Evaluate(p),Y.Evaluate(p),Z.Evaluate(p));
+	Vector3 GetPoint(float p){
+		return new Vector3(X.Evaluate(p),Y.Evaluate(p),Z.Evaluate(p));
 	}
 
 }
