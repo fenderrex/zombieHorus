@@ -43,7 +43,7 @@ public class RPGCamera : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Target.position, Target.forward, out hit,10))
         {
-            print(hit.distance);
+            //print(hit.distance);
             //print(hit.rigidbody.GetComponent<Prop>());
         }
     }
