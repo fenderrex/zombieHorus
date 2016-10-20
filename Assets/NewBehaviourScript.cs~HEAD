@@ -44,8 +44,8 @@ public class NewBehaviourScript : MonoBehaviour {
             
                 foreach (Rigidbody box2 in boxs)
                 {
-                 //   box1.GetComponent<Cart>();
-                 //   box2.GetComponent<Cart>();
+                    box1.GetComponent<Cart>();
+                    box2.GetComponent<Cart>();
                     Math.Round(diff(box1.transform.position, box2.transform.position));
 
                 }
