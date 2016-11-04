@@ -5,8 +5,11 @@ public class Scanner : MonoBehaviour {
     public char value = '-';
     public List<Vector3> camefrom = new List<Vector3>();
     public float fscore = 9999999999f;
-    public float gscore=0;
-
+    public float gscore= 9999999999f;
+    public Color errorC = new Color();
+    public Color openC = new Color();
+    public Color closedC = new Color();
+    public Color pathC = new Color();
     public Mesh trailMesh = new Mesh();
     // Dictionary<Vector3, float> gScore = new Dictionary<Vector3, float>();
     // Use this for initialization
@@ -36,10 +39,7 @@ public class Scanner : MonoBehaviour {
 
         return test;
     }
-    public Color errorC = new Color(0,0,0);
-    public Color openC = new Color(9,5,2);
-    public Color closedC = new Color();
-    public Color pathC = new Color();
+
     public void Cloak()
     {
         Mesh mesh = new Mesh();
@@ -90,7 +90,7 @@ public class Scanner : MonoBehaviour {
         co.ObjectColor = closedC;
         print(other.transform.name);
         path pth = GetComponentInParent<path>();
-        Rigidbody bob=other.GameObject.GetComponent<Rigidbody>();
+        Rigidbody bob=other.gameObject.GetComponent<Rigidbody>();
         //todo dont triger on other test nodes
         if (bob.isKinematic)//if the prop is not ment to move keep it in the data bace
         {
@@ -100,9 +100,17 @@ public class Scanner : MonoBehaviour {
             value = 'X';
 
         }
-        
+
         //lock sets into static frame 
-        pth.closeSet[transform.position] = gameObject;
+        pth.closeSet.Add(transform.position);// = gameObject;
+        if (pth.nodes.ContainsKey(transform.position)==true)//todo make into a function
+        {
+            pth.nodes[transform.position] = gameObject;
+        }
+        else
+        {
+            pth.nodes.Add(transform.position, gameObject);//make sure the node is in the list
+        }
         pth.openSet.Remove(transform.position);
         //  print(other.transform.tag);
     }
@@ -114,7 +122,15 @@ public class Scanner : MonoBehaviour {
         co.ObjectColor = openC;
         print(other.transform.tag);
         path pth = GetComponentInParent<path>();
-        pth.openSet[transform.position] = gameObject;
+        pth.openSet.Add(transform.position); //
+        if (pth.nodes.ContainsKey(transform.position)==true)
+        {
+            pth.nodes[transform.position] = gameObject;
+        }
+        else
+        {
+            pth.nodes.Add(transform.position, gameObject);//make sure the node is in the list
+        }
         pth.closeSet.Remove(transform.position);
 
     }

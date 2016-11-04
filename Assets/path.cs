@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 public class path : MonoBehaviour {
     public Dictionary<Vector3, GameObject> nodes = new Dictionary<Vector3, GameObject>();
-    public Dictionary<Vector3, GameObject> openSet = new Dictionary<Vector3, GameObject>();
-    public Dictionary<Vector3, GameObject> closeSet = new Dictionary<Vector3, GameObject>();
+    public List<Vector3> openSet = new List<Vector3>();
+    public List<Vector3> closeSet = new List<Vector3>();
     public GameObject scanner;
     public Dictionary<string, string> settings = new Dictionary<string, string>();
     public GameObject start;
@@ -14,7 +14,7 @@ public class path : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        
+        //openSet.Add(start.Transform,)
         settings.Add("renderTrail", renderTrail ? "true" : "false");//set settings
         StartCoroutine("CreateWorld");//start rendering scaner
     }
@@ -23,8 +23,14 @@ public class path : MonoBehaviour {
     void Update()
     {
         Settings();
+        Astar();
     }
+    void Astar() {
 
+   
+
+
+    }
     void Settings()
     {
 
