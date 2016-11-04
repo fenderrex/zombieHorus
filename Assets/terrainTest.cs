@@ -25,7 +25,7 @@ public class terrainTest : MonoBehaviour {
     {
         if (GUI.Button(new Rect(10, 10, 100, 25), "Wrinkle"))
         {
-            StartCoroutine("randomizePoints",0.1f);
+            StartCoroutine("randomizePoints");
         }
 
         if (GUI.Button(new Rect(10, 40, 100, 25), "Reset"))
@@ -34,8 +34,9 @@ public class terrainTest : MonoBehaviour {
         }
     }
 
-    IEnumerator randomizePoints(float strength)
+    IEnumerator randomizePoints()
     {
+        float strength = .1f;
         heights = tData.GetHeights(0, 0, xRes, yRes);
 
         for (int y = 0; y < yRes; y++)
