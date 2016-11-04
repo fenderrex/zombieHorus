@@ -65,16 +65,19 @@ public class path : MonoBehaviour {
         Vector3 pos1 = start.transform.position;
         Vector3 pos2 = end.transform.position;
         bool first = true;
-        for (float x = pos1.x; x < pos2.x + 1; x++)
+
+
+        //int subx=
+        for (float x = (pos1.x > pos2.x ? pos2.x : pos1.x); x <= (pos1.x > pos2.x ? pos1.x : pos2.x);x++)
         {
+            //x=(pos1.x > pos2.x ? +1 : -1);
             yield return new WaitForSeconds(spawnSpeed);
-            for (float y = pos1.y; y < pos2.y + 1; y++)
+            for (float y = (pos1.y> pos2.y ? pos2.y : pos1.y); y <= (pos1.y > pos2.y ? pos1.y : pos2.y); y++)
             {
                 
-
-                for (float z = 0; z < pos2.z + 1; z++)
+                for (float z = (pos1.z > pos2.z ? pos2.z : pos1.z); z <= (pos1.z > pos2.z ? pos1.z : pos2.z); z++)
                 {
-                   
+                    yield return new WaitForSeconds(spawnSpeed);
                     GameObject block = Instantiate(scanner, Vector3.zero, scanner.transform.rotation) as GameObject;
                     block.transform.parent = transform;
                     block.transform.localPosition = new Vector3(x, y, z);
