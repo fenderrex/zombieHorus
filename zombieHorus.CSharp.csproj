@@ -87,7 +87,6 @@
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerList.cs" />
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
-    <Compile Include="Assets\Lobby\nodeFlow.cs" />
     <Compile Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\Antialiasing.cs" />
     <Compile Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
     <Compile Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\BloomAndFlares.cs" />
@@ -276,9 +275,16 @@
     <Compile Include="Assets\SampleScenes\Scripts\Prop.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\WayPointSystem.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\player.cs" />
+    <Compile Include="Assets\Scanner.cs" />
     <Compile Include="Assets\astar.cs" />
     <Compile Include="Assets\astarnode.cs" />
+    <Compile Include="Assets\color.cs" />
+    <Compile Include="Assets\entity.cs" />
     <Compile Include="Assets\grid.cs" />
+    <Compile Include="Assets\matrix3D.cs" />
+    <Compile Include="Assets\path.cs" />
+    <Compile Include="Assets\path3.cs" />
+    <Compile Include="Assets\terrainTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\OpenSans\License!.txt" />
