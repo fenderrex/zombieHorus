@@ -16,6 +16,11 @@ public class path : MonoBehaviour {
     {
         //openSet.Add(start.Transform,)
         settings.Add("renderTrail", renderTrail ? "true" : "false");//set settings
+       
+    }
+    void Awake()
+    {
+
         StartCoroutine("CreateWorld");//start rendering scaner
     }
 
@@ -24,6 +29,7 @@ public class path : MonoBehaviour {
     {
         Settings();
         Astar();
+       
     }
     void Astar() {
 
@@ -71,13 +77,13 @@ public class path : MonoBehaviour {
         for (float x = (pos1.x > pos2.x ? pos2.x : pos1.x); x <= (pos1.x > pos2.x ? pos1.x : pos2.x);x++)
         {
             //x=(pos1.x > pos2.x ? +1 : -1);
-            yield return new WaitForSeconds(spawnSpeed);
+          //  yield return new WaitForSeconds(spawnSpeed);
             for (float y = (pos1.y> pos2.y ? pos2.y : pos1.y); y <= (pos1.y > pos2.y ? pos1.y : pos2.y); y++)
             {
                 
                 for (float z = (pos1.z > pos2.z ? pos2.z : pos1.z); z <= (pos1.z > pos2.z ? pos1.z : pos2.z); z++)
                 {
-                    yield return new WaitForSeconds(spawnSpeed);
+              //      yield return new WaitForSeconds(spawnSpeed);
                     GameObject block = Instantiate(scanner, Vector3.zero, scanner.transform.rotation) as GameObject;
                     block.transform.parent = transform;
                     block.transform.localPosition = new Vector3(x, y, z);
@@ -94,8 +100,9 @@ public class path : MonoBehaviour {
                     nodes[new Vector3(x, y, z)] = block;
 
                 }
-                yield return new WaitForSeconds(spawnSpeed);
+                
             }
+            yield return new WaitForSeconds(spawnSpeed);
         }
     }
 

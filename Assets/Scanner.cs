@@ -9,6 +9,7 @@ public class Scanner : MonoBehaviour {
     public Color errorC = new Color();
     public Color openC = new Color();
     public Color closedC = new Color();
+    public Color closedStaticC = new Color();
     public Color pathC = new Color();
     public Mesh trailMesh = new Mesh();
     // Dictionary<Vector3, float> gScore = new Dictionary<Vector3, float>();
@@ -87,17 +88,22 @@ public class Scanner : MonoBehaviour {
         //print(other.transform.position);
         print("enter");
         color co = this.GetComponent<color>() as color;
-        co.ObjectColor = closedC;
+        
         print(other.transform.name);
         path pth = GetComponentInParent<path>();
         Rigidbody bob=other.gameObject.GetComponent<Rigidbody>();
         //todo dont triger on other test nodes
         if (bob.isKinematic)//if the prop is not ment to move keep it in the data bace
-        {
+        {//dynaimic
+            co.ObjectColor = closedC;
             value = 'x';
-        }else
+            
+        }
+        else
         {
+            
             value = 'X';
+            co.ObjectColor = closedStaticC;
 
         }
 
