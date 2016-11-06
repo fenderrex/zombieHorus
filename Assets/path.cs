@@ -78,32 +78,37 @@ public class path : MonoBehaviour {
         {
             //x=(pos1.x > pos2.x ? +1 : -1);
           //  yield return new WaitForSeconds(spawnSpeed);
-            for (float y = (pos1.y> pos2.y ? pos2.y : pos1.y); y <= (pos1.y > pos2.y ? pos1.y : pos2.y); y++)
+            for (float y = (pos1.y> pos2.y ? pos2.y : pos1.y); y <= (pos1.y > pos2.y ? pos1.y : pos2.y); y+=3)
             {
                 
                 for (float z = (pos1.z > pos2.z ? pos2.z : pos1.z); z <= (pos1.z > pos2.z ? pos1.z : pos2.z); z++)
                 {
-              //      yield return new WaitForSeconds(spawnSpeed);
-                    GameObject block = Instantiate(scanner, Vector3.zero, scanner.transform.rotation) as GameObject;
-                    block.transform.parent = transform;
-                    block.transform.localPosition = new Vector3(x, y, z);
-                    
-                    if (first == true)
-                    {
-                        first = false;
-                        //start.transform.position
-                        Scanner script = block.GetComponent(typeof(Scanner)) as Scanner;
-                        script.gscore = 0;
-                        script.fscore = Vector3.Distance(pos1, pos2);
-                    }
+                    //      yield return new WaitForSeconds(spawnSpeed);
+                    scanerat(scanner, pos1, pos2, x, y, z);
 
-                    nodes[new Vector3(x, y, z)] = block;
 
-                }
-                
             }
             yield return new WaitForSeconds(spawnSpeed);
         }
     }
 
+}
+    void scanerat(GameObject scanner, Vector3 from, Vector3 to, float x, float y, float z)
+    {
+        ///if (Vector3.Distance(scanner.transform.position + new Vector3(x, y, z),))
+      //  {
+            GameObject block = Instantiate(scanner, Vector3.zero, scanner.transform.rotation) as GameObject;
+            block.transform.parent = transform;
+            block.transform.localPosition = new Vector3(x, y, z);
+            if (Vector3.Distance(from, new Vector3(x, y, z)) < 1f)
+
+            {
+                Scanner script = block.GetComponent(typeof(Scanner)) as Scanner;
+                script.gscore = 0;
+                script.fscore = Vector3.Distance(from, to);
+            }
+
+            nodes[new Vector3(x, y, z)] = block;
+        }
+   // }
 }

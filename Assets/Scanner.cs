@@ -12,10 +12,12 @@ public class Scanner : MonoBehaviour {
     public Color closedStaticC = new Color();
     public Color pathC = new Color();
     public Mesh trailMesh = new Mesh();
+    public float destructTime = 1f;
     // Dictionary<Vector3, float> gScore = new Dictionary<Vector3, float>();
     // Use this for initialization
     void Start() {
         //Cloak();
+        StartCoroutine(disgard(destructTime));
     }
 
     // Update is called once per frame
@@ -71,6 +73,13 @@ public class Scanner : MonoBehaviour {
         //print(value);
         return value;//This is a non threadsefe mode!!!! 
 
+    }
+    public IEnumerator disgard(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        BoxCollider a =GetComponent<BoxCollider>() as BoxCollider;
+        a.enabled = false;
     }
     public IEnumerator look(int x, int y, int z, System.Action<char> var)
     {

@@ -319,12 +319,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 234144829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f5a709af1f968143a62816b0232b47c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0433e10fa4fd04941b8afbf1f83d7258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   openSet: []
   closeSet: []
-  scanner: {fileID: 1000012633278264, guid: 1b43166c413811a45b8aa248bc129fa4, type: 2}
+  scanner: {fileID: 1000011802186736, guid: 654af28d1b7338c418f8e1020891bd45, type: 2}
   start: {fileID: 11860634}
   end: {fileID: 1245782978}
   renderTrail: 0
@@ -601,12 +601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1358831bd4e41a74ca83d3b9be2caffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  is3D: 1
-  block1: {fileID: 1000012823016346, guid: a22dc3f758c3cee48a4b324ecda5206e, type: 2}
-  scanner: {fileID: 1000012823016346, guid: a22dc3f758c3cee48a4b324ecda5206e, type: 2}
-  to: {fileID: 123344432}
-  astarpath: []
-  clean: 1
 --- !u!4 &1940650525
 Transform:
   m_ObjectHideFlags: 0
